@@ -1,5 +1,7 @@
-import 'package:drinks/widgets/get_card.dart';
+import 'package:drinks/Persistence/save_local.dart';
+import 'package:drinks/widgets/get_card_big_rnd.dart';
 import 'package:drinks/widgets/side_bar.dart';
+import 'package:drinks/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:appinio_swiper/appinio_swiper.dart';
 
@@ -38,7 +40,8 @@ class _HomePageState extends State<HomePage> {
     return Column(
       children: [
         const Spacer(flex: 10),
-        topBar(),
+        //topBar(),
+        TopBar(scaffoldKey: _scaffoldKey),
         const Spacer(flex: 5),
         imagesSwipe(context),
         const Spacer(flex: 5),
@@ -73,6 +76,8 @@ class _HomePageState extends State<HomePage> {
           child: IconButton(
             onPressed: () {
               controllerSwipe.swipeRight();
+              //SaveLocal().adLikedId()
+              print(GetCardRandom());
             },
             icon: const Icon(Icons.favorite, color: Colors.green),
             iconSize: 60,
@@ -82,6 +87,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+/*
   Widget topBar() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -93,8 +99,7 @@ class _HomePageState extends State<HomePage> {
             ),
             child: const Padding(
               padding: EdgeInsets.all(16.0),
-              child: Text("COCKTAILMATCH",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              child: Text("COCKTAILMATCH", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             )),
         const Divider(),
         GestureDetector(
@@ -116,7 +121,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     );
-  }
+  }*/
 
   loadCard() {
     //Nose per que aqui no vol que sigui void
@@ -128,10 +133,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  addNewcard() {
-    cards.add(GetCardRandom());
-  }
-
   Widget imagesSwipe(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.55,
@@ -141,7 +142,7 @@ class _HomePageState extends State<HomePage> {
         cards: cards,
         onEnd: loadCard,
         //onSwipe: addNewcard,
-        isDisabled: true,
+        isDisabled: false,
       ),
     );
   }
