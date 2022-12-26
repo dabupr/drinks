@@ -1,3 +1,4 @@
+import 'package:drinks/home_page.dart';
 import 'package:drinks/loginRegister/login.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +18,13 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Color.fromARGB(255, 233, 141, 54),
         primarySwatch: Colors.orange,
       ),
-      home: const LoginPage(),
+      home: HomePage(),
     );
   }
 }
 
+
+/*
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -30,3 +33,4 @@ class HomePage extends StatelessWidget {
     return Container();
   }
 }
+*/
