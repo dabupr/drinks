@@ -11,7 +11,11 @@ class ApiCocktails extends StatelessWidget {
 
   Future<Cocktail> getRandomCocktail() async {
     var aux = await random();
+    return aux;
+  }
 
+  Future<Cocktail> getCocktailId(int id) async {
+    var aux = await searchById(id);
     return aux;
   }
 }

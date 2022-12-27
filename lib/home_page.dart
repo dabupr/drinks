@@ -1,3 +1,5 @@
+import 'package:animated_icon/animate_icon.dart';
+import 'package:animated_icon/animate_icons.dart';
 import 'package:drinks/Persistence/save_local.dart';
 import 'package:drinks/widgets/get_card_big_rnd.dart';
 import 'package:drinks/widgets/side_bar.dart';
@@ -16,9 +18,10 @@ class _HomePageState extends State<HomePage> {
   final AppinioSwiperController controllerSwipe = AppinioSwiperController();
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   //Aquesta linea es de internet, Per que el boto funcioni
   List<Widget> cards = [];
-
+  late GetCardRandom actualDrinkInfo;
   //GetCardRandom getCardFromAPI = GetCardRandom();
 
   @override
@@ -33,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
     loadCard();
   }
 
@@ -40,8 +44,8 @@ class _HomePageState extends State<HomePage> {
     return Column(
       children: [
         const Spacer(flex: 10),
-        //topBar(),
-        TopBar(scaffoldKey: _scaffoldKey),
+        topBar(),
+        //TopBar(scaffoldKey: _scaffoldKey),
         const Spacer(flex: 5),
         imagesSwipe(context),
         const Spacer(flex: 5),
@@ -57,37 +61,44 @@ class _HomePageState extends State<HomePage> {
       children: [
         Container(
           decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(50)),
-            color: Colors.white.withOpacity(0.8),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            color: Colors.black.withOpacity(0.1),
           ),
-          child: IconButton(
-            onPressed: () {
+          child: AnimateIcon(
+            key: UniqueKey(),
+            onTap: () {
               controllerSwipe.swipeLeft();
+              const SaveLocal().adDISLikedId(actualDrinkInfo.saveCocktailID);
             },
-            icon: const Icon(Icons.thumb_down, color: Colors.red),
-            iconSize: 60,
+            iconType: IconType.continueAnimation,
+            height: 70,
+            width: 70,
+            color: Colors.red,
+            animateIcon: AnimateIcons.cross,
           ),
         ),
         Container(
           decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(50)),
-            color: Colors.white.withOpacity(0.8),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            color: Colors.black.withOpacity(0.1),
           ),
-          child: IconButton(
-            onPressed: () {
+          child: AnimateIcon(
+            key: UniqueKey(),
+            onTap: () {
               controllerSwipe.swipeRight();
-              //SaveLocal().adLikedId()
-              print(GetCardRandom());
+              const SaveLocal().adLikedId(actualDrinkInfo.saveCocktailID);
             },
-            icon: const Icon(Icons.favorite, color: Colors.green),
-            iconSize: 60,
+            iconType: IconType.continueAnimation,
+            height: 70,
+            width: 70,
+            color: Colors.green,
+            animateIcon: AnimateIcons.heart,
           ),
         ),
       ],
     );
   }
 
-/*
   Widget topBar() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -121,15 +132,13 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     );
-  }*/
+  }
 
   loadCard() {
     //Nose per que aqui no vol que sigui void
     setState(() {
-      cards.add(GetCardRandom());
-      cards.add(GetCardRandom());
-      cards.add(GetCardRandom());
-      cards.add(GetCardRandom());
+      actualDrinkInfo = GetCardRandom();
+      cards.add(actualDrinkInfo);
     });
   }
 
