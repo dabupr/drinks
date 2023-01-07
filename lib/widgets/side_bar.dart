@@ -1,5 +1,6 @@
 import 'package:drinks/about_us.dart';
 import 'package:drinks/likes_dislikes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SideBar extends StatelessWidget {
@@ -55,7 +56,9 @@ class SideBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Log out'),
-            onTap: () {},
+            onTap: () {
+              FirebaseAuth.instance.signOut();
+            },
           ),
           //const Divider(endIndent: 20, indent: 20, thickness: 5, height: 5),
         ],

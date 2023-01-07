@@ -38,7 +38,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   appinio_swiper: ^1.1.1
   cocktaildb: ^1.0.0
+
+  #Aixi queda mes bonic
   animated_icon: ^0.0.4
+  #Per el logins 
+  firebase_auth: ^4.2.5
+  firebase_core: ^2.4.1
   #Utlitzem aquestes per guardar la info
   hive: ^2.2.3
   path_provider: ^2.0.11

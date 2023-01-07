@@ -3,7 +3,6 @@ import 'package:animated_icon/animate_icons.dart';
 import 'package:drinks/Persistence/save_local.dart';
 import 'package:drinks/widgets/get_card_big_rnd.dart';
 import 'package:drinks/widgets/side_bar.dart';
-import 'package:drinks/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:appinio_swiper/appinio_swiper.dart';
 
@@ -68,7 +67,7 @@ class _HomePageState extends State<HomePage> {
             key: UniqueKey(),
             onTap: () {
               controllerSwipe.swipeLeft();
-              const SaveLocal().adDISLikedId(actualDrinkInfo.saveCocktailID);
+               SaveLocal().adDISLikedId(actualDrinkInfo.saveCocktailID);
             },
             iconType: IconType.continueAnimation,
             height: 70,
@@ -86,7 +85,7 @@ class _HomePageState extends State<HomePage> {
             key: UniqueKey(),
             onTap: () {
               controllerSwipe.swipeRight();
-              const SaveLocal().adLikedId(actualDrinkInfo.saveCocktailID);
+               SaveLocal().adLikedId(actualDrinkInfo.saveCocktailID);
             },
             iconType: IconType.continueAnimation,
             height: 70,

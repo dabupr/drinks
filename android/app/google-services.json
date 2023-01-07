@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "524163533551",
+    "project_id": "drinks-b0ef1",
+    "storage_bucket": "drinks-b0ef1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524163533551:android:346f8687c24e47ae1aa91a",
+        "android_client_info": {
+          "package_name": "com.example.drinks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524163533551-lj94vl5pmmdq0s9l14152q210npc7kls.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA498ZIYwpN9tukwh2U7Z0cRS1UHYeQSr4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524163533551-lj94vl5pmmdq0s9l14152q210npc7kls.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

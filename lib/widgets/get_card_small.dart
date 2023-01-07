@@ -1,8 +1,8 @@
 import 'package:cocktaildb/cocktaildb.dart';
 import 'package:drinks/Persistence/save_local.dart';
-import 'package:drinks/likes_dislikes.dart';
 import 'package:flutter/material.dart';
 import 'package:drinks/Persistence/api_cocktails.dart';
+import '../view_cocktail.dart';
 
 class GetCardSmall extends StatefulWidget {
   final String idCocktail;
@@ -21,6 +21,7 @@ class _GetCardSmall extends State<GetCardSmall> {
   final ApiCocktails drink = const ApiCocktails();
   bool loaded = false;
   late Cocktail cocktail;
+  late Image imgCocktail;
 
   @override
   void initState() {
@@ -42,30 +43,43 @@ class _GetCardSmall extends State<GetCardSmall> {
       borderRadius: const BorderRadius.all(Radius.circular(20.0)),
       child: Container(
         color: Colors.white,
-        child: Stack(
-          children: [
-            loaded ? getImage() : const CircularProgressIndicator(),
-            loaded ? allInfoText(context) : const CircularProgressIndicator(),
-            IconButton(
-              icon: const Icon(
-                Icons.save,
-              ),
-              iconSize: 36,
-              splashRadius: 1,
-              onPressed: () {
-                moreInfo(context);
-              },
-            )
-          ],
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ViewAllInfo(cocktail: cocktail, img: imgCocktail)),
+            );
+          },
+          child: Stack(
+            children: [
+              loaded ? getImage() : const CircularProgressIndicator(),
+              loaded ? allInfoText(context) : const CircularProgressIndicator(),
+              IconButton(
+                icon: const Icon(
+                  Icons.save,
+                ),
+                iconSize: 36,
+                splashRadius: 1,
+                onPressed: () {
+                  moreInfo(context);
+                },
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget getImage() {
-    return Image.network(
+    imgCocktail = Image.network(
       cocktail.strDrinkThumb.toString(),
       fit: BoxFit.fitWidth,
+    );
+    return Hero(
+      tag: cocktail.idDrink.toString(),
+      child: imgCocktail,
     );
   }
 
@@ -101,9 +115,9 @@ class _GetCardSmall extends State<GetCardSmall> {
               onPressed: () {
                 Navigator.of(context).pop();
                 if (widget.likeMode) {
-                  const SaveLocal().removeLikedId(cocktail.idDrink.toString());
+                  SaveLocal().removeLikedId(cocktail.idDrink.toString());
                 } else {
-                  const SaveLocal().removeDISLikedId(cocktail.idDrink.toString());
+                  SaveLocal().removeDISLikedId(cocktail.idDrink.toString());
                 }
               },
             ),

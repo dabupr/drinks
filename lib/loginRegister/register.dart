@@ -1,27 +1,25 @@
-import 'package:drinks/loginRegister/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 final TextEditingController _controllerEmail =
-    TextEditingController(text: 'david2@gmail.com'); //ToDo quit the default text
-final TextEditingController _controllerPassword = TextEditingController(text: '123456');
+    TextEditingController(/*text: 'david2@gmail.com'*/); //ToDo quit the default text
+final TextEditingController _controllerPassword = TextEditingController();
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPage();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPage extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: getBody(context),
       appBar: AppBar(
         elevation: 0,
-        title: const Text("LOGIN"),
+        title: const Text("REGISTER"),
         centerTitle: true,
       ),
     );
@@ -88,15 +86,12 @@ class _LoginPageState extends State<LoginPage> {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const RegisterPage()),
-              );
+              Navigator.pop(context);
             },
             child: const Padding(
-              padding: EdgeInsets.only(top: 8.0),
-              child: Text(
-                "I don't have an account",
+              padding:  EdgeInsets.only(top:8.0),
+              child:  Text(
+                "I have an account",
                 style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
               ),
             ),
@@ -113,12 +108,12 @@ class _LoginPageState extends State<LoginPage> {
                   if (!currentFocus.hasPrimaryFocus) {
                     currentFocus.unfocus();
                   }
-                  signIn();
+                  registerAccount();
                 },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                 ),
-                child: const Text("LOGIN"),
+                child: const Text("CREATE ACCOUNT"),
               ),
             ),
           ),
@@ -128,15 +123,15 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future signIn() async {
+  Future registerAccount() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _controllerEmail.text, password: _controllerPassword.text);
     } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Wrong password or email...')));
-
-      print("El login no ha funcionat");
+      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Invalid emial or password (maybe the email is used...)')));
+      
     }
   }
 }

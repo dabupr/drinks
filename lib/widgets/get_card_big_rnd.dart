@@ -1,7 +1,6 @@
 import 'package:cocktaildb/cocktaildb.dart';
 import 'package:flutter/material.dart';
 import 'package:drinks/Persistence/api_cocktails.dart';
-
 import '../view_cocktail.dart';
 
 class GetCardRandom extends StatefulWidget {
@@ -57,7 +56,8 @@ class _GetCardRandomState extends State<GetCardRandom> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ViewAllInfo(cocktail: cocktail, img: imgCocktail)),
+              MaterialPageRoute(
+                  builder: (context) => ViewAllInfo(cocktail: cocktail, img: imgCocktail)),
             );
           },
         ),
